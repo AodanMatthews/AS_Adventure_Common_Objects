@@ -23,7 +23,7 @@ level_attributes:
     is_unique_key: false
     key_columns:
       - productcategorykey
-    name_column: englishproductcategoryname
+    name_column: productcategoryname
   - unique_name: Product Sub-Category
     label: Product Sub-Category
     contains_unique_names: false
@@ -31,7 +31,7 @@ level_attributes:
     is_unique_key: false
     key_columns:
       - productsubcategorykey
-    name_column: englishproductsubcategoryname
+    name_column: productsubcategoryname
   - unique_name: Product Line
     label: Product Line
     contains_unique_names: false

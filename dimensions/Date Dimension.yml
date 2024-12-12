@@ -1,6 +1,281 @@
 unique_name: Date Dimension
 object_type: dimension
 label: Date Dimension
-hierarchies: []
-level_attributes: []
-type: standard
+calculation_groups:
+  - unique_name: Year Intelligence
+    label: Year Intelligence
+    description: yearly time intelligence metrics
+    calculated_members:
+      - unique_name: CY to Date
+        name: Year to Date
+        description: Year to Date
+        expression: >-
+          Sum(PeriodsToDate([Date Dimension].[Date Month Hierarchy].[YearMonth],
+          [Date Dimension].[Date Month
+          Hierarchy].CurrentMember),[Measures].currentMember)
+        format: '#,###.0;(#,###.0)'
+      - unique_name: PY
+        name: Previous Year
+        description: Previous Year
+        expression: >-
+          (ParallelPeriod([Date Dimension].[Date Month Hierarchy].[YearMonth],
+          1, [Date Dimension].[Date Month Hierarchy].CurrentMember),
+          [Measures].currentMember)
+        format: '#,###.0;(#,###.0)'
+      - unique_name: YoY
+        name: Year over Year
+        description: Year over Year
+        expression: >-
+          (([Date Dimension].[Date Month Hierarchy].CurrentMember,
+          [Measures].currentMember) - (ParallelPeriod([Date Dimension].[Date
+          Month Hierarchy].[YearMonth], 1, [Date Dimension].[Date Month
+          Hierarchy].CurrentMember), [Measures].currentMember ))
+        format: '#,###.0;(#,###.0)'
+      - unique_name: YOY (%)
+        name: Year over Year (%)
+        description: Year over Year (%)
+        expression: >-
+          DIVIDE((([Date Dimension].[Date Month Hierarchy].CurrentMember,
+          [Measures].currentMember) -  (ParallelPeriod([Date Dimension].[Date
+          Month Hierarchy].[YearMonth], 1, [Date Dimension].[Date Month
+          Hierarchy].CurrentMember), [Measures].currentMember )),
+          (ParallelPeriod([Date Dimension].[Date Month Hierarchy].[YearMonth],
+          1, [Date Dimension].[Date Month Hierarchy].CurrentMember),
+          [Measures].currentMember))
+        format: percent
+    folder: Date Intelligence
+  - unique_name: Month Intelligence
+    label: Month Intelligence
+    description: Monthly time intelligence metrics
+    calculated_members:
+      - unique_name: Month to Date
+        name: Month to Date
+        description: Month to Date
+        expression: >-
+          Sum(PeriodsToDate([Date Dimension].[Date Month Hierarchy].[Month],
+          [Date Dimension].[Date Month
+          Hierarchy].CurrentMember),[Measures].currentMember)
+        format: '#,###.0;(#,###.0)'
+      - unique_name: PM
+        name: Previous Month
+        description: Previous Month
+        expression: >-
+          (ParallelPeriod([Date Dimension].[Date Month Hierarchy].[Month], 1,
+          [Date Dimension].[Date Month Hierarchy].CurrentMember),
+          [Measures].currentMember)
+        format: '#,###.0;(#,###.0)'
+      - unique_name: MoM
+        name: Month over Month
+        description: Month over Month
+        expression: >-
+          (([Date Dimension].[Date Month Hierarchy].CurrentMember,
+          [Measures].currentMember) - (ParallelPeriod([Date Dimension].[Date
+          Month Hierarchy].[Month], 1, [Date Dimension].[Date Month
+          Hierarchy].CurrentMember), [Measures].currentMember ))
+        format: '#,###.0;(#,###.0)'
+      - unique_name: MoM (%)
+        name: Month over Month (%)
+        description: Month over Month (%)
+        expression: >-
+          DIVIDE((([Date Dimension].[Date Month Hierarchy].CurrentMember,
+          [Measures].currentMember) -  (ParallelPeriod([Date Dimension].[Date
+          Month Hierarchy].[Month], 1, [Date Dimension].[Date Month
+          Hierarchy].CurrentMember), [Measures].currentMember )),
+          (ParallelPeriod([Date Dimension].[Date Month Hierarchy].[Month], 1,
+          [Date Dimension].[Date Month Hierarchy].CurrentMember),
+          [Measures].currentMember))
+        format: percent
+    folder: Date Intelligence
+  - unique_name: Time Intelligence
+    label: Time Intelligence
+    description: Dynamic time intelligence metrics
+    calculated_members:
+      - unique_name: Current
+        name: Current
+        description: Current Member
+        expression: >-
+          ([Date Dimension].[Date Month Hierarchy].CurrentMember,
+          [Measures].currentMember)
+        format: '#,###.0;(#,###.0)'
+      - unique_name: Previous
+        name: Previous
+        description: Previous Member
+        expression: >-
+          ([Date Dimension].[Date Month Hierarchy].CurrentMember.prevMember,
+          [Measures].currentMember)
+        format: '#,###.0;(#,###.0)'
+    folder: Date Intelligence
+hierarchies:
+  - unique_name: Date Month Hierarchy
+    label: Date Month Hierarchy
+    description: A Gregorian Date Hierarchy.  Organizes time by Year, Quarter, Month, Day
+    filter_empty: 'yes'
+    folder: Date Attributes
+    levels:
+      - unique_name: YearMonth
+      - unique_name: Quarter
+        secondary_attributes:
+          - unique_name: d_quarter_number
+            label: Quarter Number
+            dataset: dim_time_dataset
+            folder: Date Attributes
+            key_columns:
+              - quarter_of_year
+            name_column: quarter_of_year
+            sort_column: quarter_of_year
+      - unique_name: Month
+        secondary_attributes:
+          - unique_name: d_month_start
+            label: Month Start
+            dataset: dim_time_dataset
+            folder: Date Attributes
+            key_columns:
+              - month
+            name_column: month
+      - unique_name: Day
+        secondary_attributes:
+          - unique_name: d_day_of_week_number
+            label: Day Of Week Number
+            dataset: dim_time_dataset
+            folder: Date Attributes
+            key_columns:
+              - day_of_week
+            name_column: day_of_week
+            sort_column: day_of_week
+          - unique_name: d_day_of_week_name
+            label: Day Of Week Name
+            dataset: dim_time_dataset
+            folder: Date Attributes
+            key_columns:
+              - day_of_week_name
+            name_column: day_of_week_name
+            sort_column: day_of_week
+          - unique_name: Day_Date
+            label: Day Date
+            dataset: dim_time_dataset
+            folder: Date Attributes
+            key_columns:
+              - pk_date
+            name_column: pk_date
+            sort_column: pk_date
+          - unique_name: w_day_of_week_name
+            label: W Day Of Week Name
+            dataset: dim_time_dataset
+            folder: Date Attributes
+            key_columns:
+              - day_of_week_name
+            name_column: day_of_week_name
+            sort_column: day_of_week_name
+          - unique_name: w_day_of_week_number
+            label: W Day Of Week Number
+            dataset: dim_time_dataset
+            folder: Date Attributes
+            key_columns:
+              - day_of_week
+            name_column: day_of_week
+            sort_column: day_of_week
+          - unique_name: W_Day_Date
+            label: W Day Date
+            dataset: dim_time_dataset
+            folder: Date Attributes
+            key_columns:
+              - pk_date
+            name_column: pk_date
+            sort_column: pk_date
+      - unique_name: Date Key Join
+  - unique_name: Date Week Hierarchy
+    label: Date Week Hierarchy
+    filter_empty: 'yes'
+    folder: Date Attributes
+    levels:
+      - unique_name: YearWeek
+      - unique_name: Week
+        secondary_attributes:
+          - unique_name: d_week_of_year
+            label: Week Of Year
+            dataset: dim_time_dataset
+            folder: Date Attributes
+            key_columns:
+              - week_of_year
+            name_column: week_of_year
+            sort_column: week_of_year
+      - unique_name: Day
+      - unique_name: W Date Key Join
+level_attributes:
+  - unique_name: YearMonth
+    label: Year
+    description: Year level of the Standard Calendar Month Hierarchy
+    dataset: dim_time_dataset
+    key_columns:
+      - year
+    name_column: year_name
+    time_unit: year
+  - unique_name: Quarter
+    label: Quarter
+    dataset: dim_time_dataset
+    key_columns:
+      - quarter
+    name_column: quarter_name
+    sort_column: quarter
+    time_unit: quarter
+  - unique_name: Month
+    label: Month
+    dataset: dim_time_dataset
+    key_columns:
+      - month
+    name_column: month_name
+    sort_column: month
+    time_unit: month
+  - unique_name: Day
+    label: Day
+    description: Day level of standard calendar Month Hierarchy
+    allowed_calcs_for_dma:
+      - ParallelPeriod
+      - Ancestor
+      - Descendants
+      - Siblings
+      - PeriodsToDate
+    dataset: dim_time_dataset
+    is_unique_key: true
+    key_columns:
+      - pk_date
+    name_column: date_name
+    sort_column: pk_date
+    time_unit: day
+  - unique_name: YearWeek
+    label: Year
+    dataset: dim_time_dataset
+    key_columns:
+      - year
+    name_column: year_name
+    sort_column: year
+    time_unit: year
+  - unique_name: Week
+    label: Week
+    dataset: dim_time_dataset
+    key_columns:
+      - week
+    name_column: week_name
+    sort_column: week
+    time_unit: week
+  - unique_name: Date Key Join
+    label: Date Key Join
+    dataset: dim_time_dataset
+    is_hidden: true
+    key_columns:
+      - datekey
+    name_column: date_name
+    sort_column: datekey
+    time_unit: day
+  - unique_name: W Date Key Join
+    label: W Date Key Join
+    contains_unique_names: false
+    dataset: dim_time_dataset
+    is_hidden: true
+    is_unique_key: false
+    key_columns:
+      - datekey
+    name_column: date_name
+    sort_column: datekey
+    time_unit: day
+type: time

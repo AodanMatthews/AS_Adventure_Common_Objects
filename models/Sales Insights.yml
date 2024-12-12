@@ -1,0 +1,61 @@
+unique_name: Sales Insights
+object_type: model
+label: Sales Insights
+dimensions: []
+metrics:
+
+  - unique_name: Sales Amount_sum
+
+
+relationships:
+  - unique_name: factinternetsales_productkey_to_Product Dimension_Product Code
+    from:
+      dataset: factinternetsales
+      join_columns:
+        - productkey
+    to:
+      dimension: Product Dimension
+      level: Product Code
+  - unique_name: factinternetsales_salesterritorykey_to_Geography Dimension_Geography Join
+    from:
+      dataset: factinternetsales
+      join_columns:
+        - salesterritorykey
+    to:
+      dimension: Geography Dimension
+      level: Geography Join
+  - unique_name: factinternetsales_shipdatekey_to_Date Dimension_Date Key Join
+    from:
+      dataset: factinternetsales
+      join_columns:
+        - shipdatekey
+    to:
+      dimension: Date Dimension
+      level: Date Key Join
+  - unique_name: factinternetsales_orderdatekey_to_Date Dimension_Date Key Join
+    from:
+      dataset: factinternetsales
+      join_columns:
+        - orderdatekey
+    to:
+      dimension: Date Dimension
+      level: Date Key Join
+  - unique_name: factinternetsales_shipdatekey_to_Date Dimension_W Date Key Join
+    from:
+      dataset: factinternetsales
+      join_columns:
+        - shipdatekey
+    to:
+      dimension: Date Dimension
+      level: W Date Key Join
+  - unique_name: factinternetsales_orderdatekey_to_Date Dimension_W Date Key Join
+    from:
+      dataset: factinternetsales
+      join_columns:
+        - orderdatekey
+    to:
+      dimension: Date Dimension
+      level: W Date Key Join
+
+
+
