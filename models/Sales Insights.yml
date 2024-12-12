@@ -11,6 +11,7 @@ metrics:
   - unique_name: Total Product Cost_sum
   - unique_name: Unit Price Discount
   - unique_name: Unit Price
+  - unique_name: Extended Amount_sum
 relationships:
   - unique_name: factinternetsales_productkey_to_Product Dimension_Product Code
     from:
