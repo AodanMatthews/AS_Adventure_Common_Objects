@@ -1,6 +1,0 @@
-unique_name: As_Adventure
-object_type: connection
-label: As_Adventure
-as_connection: Databricks
-database: ' '
-schema: ' '
