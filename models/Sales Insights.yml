@@ -3,10 +3,8 @@ object_type: model
 label: Sales Insights
 dimensions: []
 metrics:
-
   - unique_name: Sales Amount_sum
-
-
+  - unique_name: Tax Amount_sum
 relationships:
   - unique_name: factinternetsales_productkey_to_Product Dimension_Product Code
     from:
@@ -56,6 +54,3 @@ relationships:
     to:
       dimension: Date Dimension
       level: W Date Key Join
-
-
-
