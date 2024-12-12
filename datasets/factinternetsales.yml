@@ -1,6 +1,6 @@
 unique_name: factinternetsales
 object_type: dataset
-label: factinternetsalesorig
+label: factinternetsales
 columns:
   - name: productkey
     data_type: int

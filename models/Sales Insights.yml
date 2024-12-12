@@ -5,6 +5,12 @@ dimensions: []
 metrics:
   - unique_name: Sales Amount_sum
   - unique_name: Tax Amount_sum
+  - unique_name: Order Quantity_sum
+  - unique_name: Discount Amount_sum
+  - unique_name: Product Standard Cost_sum
+  - unique_name: Total Product Cost_sum
+  - unique_name: Unit Price Discount
+  - unique_name: Unit Price
 relationships:
   - unique_name: factinternetsales_productkey_to_Product Dimension_Product Code
     from:
@@ -54,3 +60,11 @@ relationships:
     to:
       dimension: Date Dimension
       level: W Date Key Join
+  - unique_name: factinternetsales_currencykey_to_Currency Dimension_Base Currency
+    from:
+      dataset: factinternetsales
+      join_columns:
+        - currencykey
+    to:
+      dimension: Currency Dimension
+      level: Base Currency
