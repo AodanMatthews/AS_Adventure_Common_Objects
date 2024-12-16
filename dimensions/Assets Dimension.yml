@@ -35,7 +35,7 @@ level_attributes:
   - unique_name: Product Line
     label: Product Line
     contains_unique_names: false
-    dataset: dimproduct
+    dataset: asset_dataset
     is_unique_key: false
     key_columns:
       - productline
@@ -43,7 +43,7 @@ level_attributes:
   - unique_name: Product Name
     label: Assets Name
     contains_unique_names: false
-    dataset: dimproduct
+    dataset: asset_dataset
     is_unique_key: false
     key_columns:
       - productkey
@@ -51,7 +51,7 @@ level_attributes:
   - unique_name: Product Code
     label: Assets Code
     contains_unique_names: false
-    dataset: dimproduct
+    dataset: asset_dataset
     is_unique_key: false
     key_columns:
       - productkey
@@ -59,7 +59,7 @@ level_attributes:
   - unique_name: Color
     label: Color
     contains_unique_names: false
-    dataset: dimproduct
+    dataset: asset_dataset
     is_unique_key: false
     key_columns:
       - color
@@ -67,7 +67,7 @@ level_attributes:
   - unique_name: Size
     label: Size
     contains_unique_names: false
-    dataset: dimproduct
+    dataset: asset_dataset
     is_unique_key: false
     key_columns:
       - size
@@ -75,7 +75,7 @@ level_attributes:
   - unique_name: Style
     label: Style
     contains_unique_names: false
-    dataset: dimproduct
+    dataset: asset_dataset
     is_unique_key: false
     key_columns:
       - style
@@ -83,7 +83,7 @@ level_attributes:
   - unique_name: Weight
     label: Watt
     contains_unique_names: false
-    dataset: dimproduct
+    dataset: asset_dataset
     is_unique_key: false
     key_columns:
       - weight
@@ -97,7 +97,7 @@ relationships:
       level: Product Category
     type: snowflake
   - from:
-      dataset: dimproduct
+      dataset: asset_dataset
       join_columns:
         - productsubcategorykey
     to:
