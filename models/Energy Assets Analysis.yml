@@ -1,6 +1,6 @@
-unique_name: Sales Insights
+unique_name: energy_assets_analysis
 object_type: model
-label: Sales Insights
+label: Energy Assets Analysis
 dimensions: []
 metrics:
   - unique_name: Sales Amount_sum
