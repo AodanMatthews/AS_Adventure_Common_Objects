@@ -1,6 +1,6 @@
-unique_name: Product Dimension
+unique_name: Assets Dimension
 object_type: dimension
-label: Product Dimension
+label: Assets Dimension
 hierarchies:
   - unique_name: Product Hierarchy
     label: Product Hierarchy
@@ -41,7 +41,7 @@ level_attributes:
       - productline
     name_column: productline
   - unique_name: Product Name
-    label: Product Name
+    label: Assets Name
     contains_unique_names: false
     dataset: dimproduct
     is_unique_key: false
@@ -49,7 +49,7 @@ level_attributes:
       - productkey
     name_column: englishproductname
   - unique_name: Product Code
-    label: Product Code
+    label: Assets Code
     contains_unique_names: false
     dataset: dimproduct
     is_unique_key: false
@@ -81,7 +81,7 @@ level_attributes:
       - style
     name_column: style
   - unique_name: Weight
-    label: Weight
+    label: Watt
     contains_unique_names: false
     dataset: dimproduct
     is_unique_key: false

@@ -19,7 +19,7 @@ relationships:
       join_columns:
         - productkey
     to:
-      dimension: Product Dimension
+      dimension: Assets Dimension
       level: Product Code
   - unique_name: factinternetsales_salesterritorykey_to_Geography Dimension_Geography Join
     from:
